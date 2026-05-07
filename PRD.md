@@ -84,3 +84,24 @@ The project roadmap expands upon items listed in `plans.txt` and groups them int
 ## Appendix
 - Current version of the scanner requires Python 3.8+ and dependencies listed in `requirements.txt`.
 - All code is released under the MIT License.
+
+---
+
+## Defensive Deception Research
+
+Future defensive research MAY include:
+
+- honeypot telemetry
+- deception environments
+- padded-cell detection concepts
+- simulated service layers
+- anomaly-triggered alerting
+
+Constraints:
+
+- defensive only
+- isolated environments only
+- no offensive automation
+- no persistence/exploitation tooling
+- explicit authorization required
+

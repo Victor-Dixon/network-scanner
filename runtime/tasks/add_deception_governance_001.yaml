@@ -1,0 +1,18 @@
+task_id: add_deception_governance_001
+repo: network-scanner
+type: governance
+status: completed
+
+summary:
+  - added deception defense principles
+  - documented honeypot/padded-cell constraints
+  - enforced defensive-only boundary
+
+artifacts:
+  - docs/DECEPTION_DEFENSE_PRINCIPLES.md
+  - PRD.md
+
+rules:
+  - no offensive automation
+  - authorized targets only
+  - isolated deception environments only
