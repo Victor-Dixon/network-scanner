@@ -1,0 +1,71 @@
+
+==================================== ERRORS ====================================
+_______________ ERROR collecting tests/test_anomaly_detection.py _______________
+ImportError while importing test module '/data/data/com.termux/files/home/projects/network-scanner/tests/test_anomaly_detection.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../../../usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_anomaly_detection.py:3: in <module>
+    from sklearn.exceptions import NotFittedError
+E   ModuleNotFoundError: No module named 'sklearn'
+______________ ERROR collecting tests/test_check_ip_abuseipdb.py _______________
+tests/test_check_ip_abuseipdb.py:3: in <module>
+    from threat_intelligence import check_ip_abuseipdb # Replace `your_module` with the actual file name
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+threat_intelligence.py:13: in <module>
+    raise ValueError("Missing ABUSE_IP_DB_API_KEY. Please set it in the .env file.")
+E   ValueError: Missing ABUSE_IP_DB_API_KEY. Please set it in the .env file.
+____________ ERROR collecting tests/test_deep_anomaly_detection.py _____________
+ImportError while importing test module '/data/data/com.termux/files/home/projects/network-scanner/tests/test_deep_anomaly_detection.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../../../usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_deep_anomaly_detection.py:5: in <module>
+    from deep_anomaly_detection import (
+deep_anomaly_detection.py:3: in <module>
+    from sklearn.model_selection import train_test_split
+E   ModuleNotFoundError: No module named 'sklearn'
+_____________________ ERROR collecting tests/test_main.py ______________________
+ImportError while importing test module '/data/data/com.termux/files/home/projects/network-scanner/tests/test_main.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../../../usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_main.py:4: in <module>
+    from main import main
+main.py:5: in <module>
+    from scapy.all import srp, Ether, ARP
+E   ModuleNotFoundError: No module named 'scapy'
+______________ ERROR collecting tests/test_threat_intelligence.py ______________
+tests/test_threat_intelligence.py:3: in <module>
+    from threat_intelligence import check_ip_abuseipdb
+threat_intelligence.py:13: in <module>
+    raise ValueError("Missing ABUSE_IP_DB_API_KEY. Please set it in the .env file.")
+E   ValueError: Missing ABUSE_IP_DB_API_KEY. Please set it in the .env file.
+=============================== warnings summary ===============================
+tests/test_basic.py:105
+  /data/data/com.termux/files/home/projects/network-scanner/tests/test_basic.py:105: PytestUnknownMarkWarning: Unknown pytest.mark.slow - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.slow
+
+tests/test_basic.py:167
+  /data/data/com.termux/files/home/projects/network-scanner/tests/test_basic.py:167: PytestUnknownMarkWarning: Unknown pytest.mark.unit - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    pytest.mark.unit,
+
+tests/test_basic.py:168
+  /data/data/com.termux/files/home/projects/network-scanner/tests/test_basic.py:168: PytestUnknownMarkWarning: Unknown pytest.mark.integration - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    pytest.mark.integration,
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+ERROR tests/test_anomaly_detection.py
+ERROR tests/test_check_ip_abuseipdb.py - ValueError: Missing ABUSE_IP_DB_API_...
+ERROR tests/test_deep_anomaly_detection.py
+ERROR tests/test_main.py
+ERROR tests/test_threat_intelligence.py - ValueError: Missing ABUSE_IP_DB_API...
+!!!!!!!!!!!!!!!!!!! Interrupted: 5 errors during collection !!!!!!!!!!!!!!!!!!!!
+3 warnings, 5 errors in 3.28s
