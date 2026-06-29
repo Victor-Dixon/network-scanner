@@ -266,3 +266,45 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Made with ❤️ by AI Assistant**
 
 **network-scanner** - Advanced network-scanner solution
+
+<!-- DREAMVAULT_PORTFOLIO_README:BEGIN schema=v1 generated="2026-06-29T02:03:42Z" -->
+## Portfolio status
+
+**Network recon tools** — Network scanning and security reconnaissance utilities.
+
+| Field | Value |
+|---|---|
+| **Canonical ID** | `network-scanner` |
+| **Bucket** | unclassified |
+| **Action** | — |
+| **GitHub** | [network-scanner](https://github.com/Victor-Dixon/network-scanner) |
+
+### Repository inventory
+
+*Filesystem scan at `2026-06-29T02:03:42Z` — regenerate via `python runtime/scripts/sync_portfolio_readmes_001.py`.*
+
+| Signal | Value |
+|---|---|
+| Python files | 16 |
+| Test files | 9 |
+| CI workflows | 2 |
+| runtime/tasks YAML | 1 |
+| pyproject.toml | no |
+| package.json | no |
+| tests/ directory | yes |
+| Git branch | master |
+| Working tree | dirty |
+
+**Top-level directories:** .dreamos_reports, .github, .project, docs, runtime, tests
+
+**Top-level files:** .gitattributes, .gitignore, AGENTS.md, CONSOLIDATION_MANIFEST.md, LICENSE, MASTER_TASK_LIST.md, MASTER_TASK_LOG.md, NEXT_UP.md, PRD.md, PRODUCTION_READINESS.md, PROJECT_STRUCTURE_TREE.md, README.md, ROADMAP.md, anomaly_detection.py, deep_anomaly_detection.py, main.py, plans.txt, requirements.txt, setup.py, threat_intelligence.py, utils.py, vulnerabilities.db, vulnerability_assessment.py
+
+### Consolidation signals
+
+- No pyproject.toml or package.json — packaging boundary unclear.
+- 1 runtime/tasks YAML files — may overlap DreamVault lanes.
+
+### Run / verify
+
+- `pip install -r requirements.txt`
+<!-- DREAMVAULT_PORTFOLIO_README:END schema=v1 generated="2026-06-29T02:03:42Z" -->
