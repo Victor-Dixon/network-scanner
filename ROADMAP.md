@@ -2,9 +2,8 @@
 
 ## Current
 
-- Add governance artifact baseline.
-- Capture pytest blockers.
-- Preserve tests as characterization evidence.
+- Governance artifact baseline on default branch (`master`).
+- Capture pytest blockers; preserve tests as characterization evidence.
 
 ## Next
 
@@ -14,8 +13,8 @@
 4. Isolate sklearn ML tests.
 5. Register pytest markers: unit, integration, slow.
 
-## Later
+## Later (PRD phases)
 
-- No-network unit test lane.
-- Authorized scan workflow.
-- Report/export pipeline.
+- IPv6 support and OS fingerprinting improvements
+- Threat intelligence platform feeds and CVE matching
+- Compliance report templates and plugin architecture

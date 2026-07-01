@@ -2,6 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python Version](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+![CI/CD](https://github.com/Victor-Dixon/network-scanner/actions/workflows/ci.yml/badge.svg)
 
 **This is a well-engineered network security scanner that combines traditional network scanning capabilities with modern machine learning techniques for anomaly detection. The project demonstrates solid...**
 

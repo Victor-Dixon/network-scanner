@@ -1,21 +1,23 @@
 # Project Structure Tree
 
+```
 network-scanner/
-- README.md
-- PRD.md
-- AGENTS.md
-- ROADMAP.md
-- MASTER_TASK_LIST.md
-- MASTER_TASK_LOG.md
-- NEXT_UP.md
-- PRODUCTION_READINESS.md
-- PROJECT_STRUCTURE_TREE.md
-- CONSOLIDATION_MANIFEST.md
-- main.py
-- anomaly_detection.py
-- deep_anomaly_detection.py
-- threat_intelligence.py
-- vulnerability_assessment.py
-- utils.py
-- tests/
-- .dreamos_reports/
+├── main.py
+├── anomaly_detection.py
+├── deep_anomaly_detection.py
+├── threat_intelligence.py
+├── vulnerability_assessment.py
+├── utils.py
+├── requirements.txt
+├── setup.py
+├── pytest.ini
+├── README.md
+├── PRD.md
+├── LICENSE
+├── tests/
+│   └── test_*.py
+├── .github/workflows/ci.yml
+└── .dreamos_reports/
+```
+
+Note: Local venv at `network-scanner/` is gitignored — not part of the public tree.
