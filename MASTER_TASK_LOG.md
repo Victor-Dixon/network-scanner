@@ -1,5 +1,9 @@
 # Master Task Log
 
+## 2026-07-01 — Fix CI badge URL (Agent-2 gas 4/10)
+
+- README badge: `Dadudekc/network-scanner` → `Victor-Dixon/network-scanner` (matches origin remote).
+
 ## 2026-07-01 — Remove tracked venv (Agent-2 gas 3/10)
 
 - `git rm -r --cached network-scanner/` — 19 venv files untracked; `.gitignore` already excludes path.

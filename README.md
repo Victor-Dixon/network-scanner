@@ -1,6 +1,6 @@
 # network-scanner
 
-![CI/CD](https://github.com/Dadudekc/network-scanner/actions/workflows/ci.yml/badge.svg)
+![CI/CD](https://github.com/Victor-Dixon/network-scanner/actions/workflows/ci.yml/badge.svg)
 
 
 Network Scanner is a powerful, easy-to-use tool designed to enhance network security and administration through comprehensive scanning and analysis. Developed with Python, it integrates cutting-edge techniques for detecting devices on a network, identifying open ports, and potentially vulnerable services. This project is fueled by a commitment to open-source principles and aims to provide the community with a robust tool for educational and ethical security testing.

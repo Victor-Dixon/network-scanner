@@ -4,7 +4,7 @@
 
 - [x] Add governance artifact bundle (2026-07-01)
 - [x] Remove tracked local venv directory (2026-07-01)
-- [ ] Fix CI badge org URL in README
+- [x] Fix CI badge org URL in README (2026-07-01)
 
 ## P1 — Product
 

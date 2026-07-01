@@ -4,8 +4,8 @@
 
 ## Current focus
 
-1. Complete governance artifact set for client-show production readiness.
-2. Fix CI badge org URL in README — align with Victor-Dixon/network-scanner.
+1. Clone remaining client-show repos (HCshinobi, HomeSchool_Mastery, SWARM) for governance pass.
+2. Install/run docs polish in README (install + quick start sections).
 
 ## Verify
 
