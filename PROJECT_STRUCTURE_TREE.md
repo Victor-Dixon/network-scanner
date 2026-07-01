@@ -20,4 +20,4 @@ network-scanner/
 └── .github/workflows/ci.yml
 ```
 
-Note: `network-scanner/` local venv is tracked today — scheduled for removal.
+Note: Local venv may exist at `network-scanner/` but is gitignored — not part of the public tree.

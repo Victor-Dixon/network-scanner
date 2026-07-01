@@ -3,7 +3,7 @@
 ## P0 — Client-show readiness
 
 - [x] Add governance artifact bundle (2026-07-01)
-- [ ] Remove tracked local venv directory
+- [x] Remove tracked local venv directory (2026-07-01)
 - [ ] Fix CI badge org URL in README
 
 ## P1 — Product

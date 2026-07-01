@@ -5,8 +5,7 @@
 ## Current focus
 
 1. Complete governance artifact set for client-show production readiness.
-2. Remove committed local venv (`network-scanner/`) from default branch — add to `.gitignore`.
-3. Align GitHub remote badge URL with `Victor-Dixon/network-scanner` canonical org.
+2. Fix CI badge org URL in README — align with Victor-Dixon/network-scanner.
 
 ## Verify
 
