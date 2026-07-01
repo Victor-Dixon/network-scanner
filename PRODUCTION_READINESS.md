@@ -12,7 +12,7 @@
 | License | PASS | LICENSE (MIT) |
 | Governance docs | PASS | AGENTS.md, ROADMAP.md, MASTER_TASK_* |
 | No secrets in repo | REVIEW | Rotate any AbuseIPDB keys; use env vars |
-| Venv not in tree | PASS | `network-scanner/` removed from git index 2026-07-01 |
+| Venv not in tree | PASS | venv gitignored; never tracked on `master` |
 
 ## Blocking issues
 

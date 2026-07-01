@@ -4,11 +4,12 @@
 
 - Cherry-picked governance commits from `main` onto `master`.
 - Merged honest production readiness with client-show artifact contract gates.
+- Venv was never tracked on `master`; gate PASS via `.gitignore`.
 
-## 2026-07-01 — Governance artifact bundle (Agent-2)
+## 2026-07-01 — Governance + venv on main branch (Agent-2)
 
-- Added governance docs; artifact contract 2/9 → 9/9 on `main`.
-- Removed tracked venv; fixed CI badge URL.
+- Added governance docs; artifact contract 2/9 → 9/9.
+- Removed tracked venv on `main`; fixed CI badge URL.
 
 ## 2026-05-07
 
