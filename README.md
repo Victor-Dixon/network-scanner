@@ -77,10 +77,13 @@ Recommended GitHub repository description:
 ```bash
 git clone https://github.com/Victor-Dixon/network-scanner.git
 cd network-scanner
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
 ```
+
+If your environment uses `python` instead of `python3`, use that launcher
+consistently.
 
 Notes from the current audit:
 
@@ -89,7 +92,7 @@ Notes from the current audit:
 - `deep_anomaly_detection.py` imports Keras, but no Keras/TensorFlow dependency
   is listed in `requirements.txt`.
 - `setup.py` metadata does not currently define a working package layout; this
-  repository is most accurately run from the source tree with `python main.py`.
+  repository is most accurately run from the source tree with `python3 main.py`.
 
 ## Configuration
 
@@ -111,25 +114,25 @@ No `config.json`, `.env.example`, `DATABASE_URL`, `--config`, `--api-key`, or
 Show CLI help:
 
 ```bash
-python main.py --help
+python3 main.py --help
 ```
 
 Discover hosts on an authorized IPv4 range:
 
 ```bash
-python main.py --scan-ip 192.168.1.0/24
+python3 main.py --scan-ip 192.168.1.0/24
 ```
 
 Check the local vulnerability database for an exact service/version pair:
 
 ```bash
-python main.py --vuln-check nginx:1.16.1
+python3 main.py --vuln-check nginx:1.16.1
 ```
 
 Run the sample anomaly-detection path:
 
 ```bash
-python main.py --analyze
+python3 main.py --analyze
 ```
 
 Known issue: `--analyze` currently generates 5-feature random data while
@@ -171,14 +174,15 @@ tree summary.
 ## Testing
 
 ```bash
-pytest -q
+python3 -m pytest -q
 ```
 
 Known test and verification blockers:
 
 - Importing `threat_intelligence.py` requires `ABUSE_IP_DB_API_KEY`.
-- Some tests rely on optional or missing dependencies depending on the
-  environment, including Keras/TensorFlow for `deep_anomaly_detection.py`.
+- Latest local verification after `python3 -m pip install -r requirements.txt`
+  still fails during collection because Keras/TensorFlow is not installed for
+  `deep_anomaly_detection.py`.
 - `tests/test_basic.py` contains generic placeholder tests and pytest marks
   that are not registered in a `pytest.ini`.
 - The CI workflow `.github/workflows/ci.yml` allows test failures to continue;

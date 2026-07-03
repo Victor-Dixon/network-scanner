@@ -28,6 +28,11 @@ authorized environments.
   - next work: stabilize current behavior before expanding product scope.
 - Documented the recommended GitHub repository description in README and
   updated versioned package metadata description in `setup.py`.
+- Verification after installing `requirements.txt`:
+  - `python3 -m py_compile setup.py` passed.
+  - `python3 -m pytest -q` failed during collection on the already-documented
+    import-time AbuseIPDB key requirement, missing Keras dependency for
+    `deep_anomaly_detection.py`, and unregistered pytest markers.
 
 ## 2026-07-01 — Client-show merge to master (Agent-2 gas 7/10)
 

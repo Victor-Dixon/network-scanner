@@ -43,6 +43,10 @@ not as a production scanner or offensive tool.
 
 ## Blocking issues
 
+- Latest local verification on 2026-07-03:
+  - `python3 -m py_compile setup.py` passed.
+  - `python3 -m pytest -q` failed during collection after installing
+    `requirements.txt`.
 - `threat_intelligence.py` fails at import when `ABUSE_IP_DB_API_KEY` is
   missing.
 - Full pytest collection can require credentials or dependencies that should be

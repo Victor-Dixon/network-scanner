@@ -127,7 +127,8 @@ act as value objects by convention:
 
 ### CLI host discovery
 
-1. User runs `python main.py --scan-ip <range>`.
+1. User runs `python3 main.py --scan-ip <range>` or the equivalent local Python
+   launcher.
 2. `main.main` initializes and seeds the local vulnerability database.
 3. `scan_network` validates the range with `ipaddress`.
 4. scapy sends ARP broadcast packets.
@@ -135,7 +136,8 @@ act as value objects by convention:
 
 ### CLI vulnerability lookup
 
-1. User runs `python main.py --vuln-check <service>:<version>`.
+1. User runs `python3 main.py --vuln-check <service>:<version>` or the
+   equivalent local Python launcher.
 2. `main.main` initializes and seeds SQLite vulnerability data.
 3. CLI input is split into service name and version.
 4. `vulnerability_assessment.assess_vulnerabilities` queries exact matches.
@@ -143,7 +145,8 @@ act as value objects by convention:
 
 ### CLI anomaly sample
 
-1. User runs `python main.py --analyze`.
+1. User runs `python3 main.py --analyze` or the equivalent local Python
+   launcher.
 2. `AnomalyDetectionModel` is created.
 3. Random NumPy training and test matrices are generated.
 4. Model is trained, predictions are converted to anomaly row indices, and
@@ -173,9 +176,9 @@ act as value objects by convention:
 Implemented interactions:
 
 - CLI:
-  - `python main.py --scan-ip <IPv4 range>`
-  - `python main.py --analyze`
-  - `python main.py --vuln-check <service>:<version>`
+  - `python3 main.py --scan-ip <IPv4 range>`
+  - `python3 main.py --analyze`
+  - `python3 main.py --vuln-check <service>:<version>`
 - Direct Python imports for utility, vulnerability, threat-intelligence, and
   anomaly modules.
 - Pytest suite for characterization and placeholder tests.

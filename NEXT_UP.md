@@ -44,9 +44,13 @@ Stabilize existing behavior and tests before adding new features.
 Expected verification command:
 
 ```bash
-pytest -q
+python3 -m pytest -q
 ```
 
-Known blocker before the next implementation pass: test collection may fail if
-`ABUSE_IP_DB_API_KEY` is not set because `threat_intelligence.py` validates the
-key during import.
+Latest verification on 2026-07-03 after installing `requirements.txt` failed
+during collection because:
+
+- `threat_intelligence.py` validates `ABUSE_IP_DB_API_KEY` during import;
+- `deep_anomaly_detection.py` imports Keras, which is not installed by
+  `requirements.txt`;
+- pytest markers `slow`, `unit`, and `integration` are not registered.
