@@ -2,7 +2,8 @@
 
 ## Purpose
 
-This repository may support defensive security research concepts inspired by:
+This repository currently models defensive network security diagnostics. It may
+support future defensive security research concepts inspired by:
 
 - honeypots
 - padded-cell systems
@@ -10,7 +11,9 @@ This repository may support defensive security research concepts inspired by:
 - detection-oriented telemetry
 - attacker-behavior observation
 
-The goal is DEFENSIVE visibility and containment only.
+The goal is DEFENSIVE visibility and containment only. No runtime deception
+subsystem was found in the current codebase; these principles are governance
+constraints for future work.
 
 ---
 
@@ -87,7 +90,7 @@ Never scan unauthorized networks.
 
 ## 6. Separation of Concerns
 
-Subsystems should remain isolated:
+Conceptual subsystems should remain isolated if they are implemented later:
 
 - scanner/
 - telemetry/

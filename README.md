@@ -4,308 +4,232 @@
 [![Python Version](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 ![CI/CD](https://github.com/Victor-Dixon/network-scanner/actions/workflows/ci.yml/badge.svg)
 
-**This is a well-engineered network security scanner that combines traditional network scanning capabilities with modern machine learning techniques for anomaly detection. The project demonstrates solid...**
+Defensive Python network-security toolkit for authorized environments: ARP
+IPv4 host discovery, TCP port/banner helpers, local vulnerability checks,
+AbuseIPDB reputation lookup, and ML anomaly-detection experiments.
 
-A network-scanner built with Python. This project provides Provides network-scanner functionality.
+> Use this project only on networks and systems you own or are explicitly
+> authorized to test.
 
----
+## What this project is
 
-## 🚀 Features
+`network-scanner` is a small Python codebase in the defensive network security
+diagnostics domain. It models the early stages of local security assessment:
+finding hosts, probing ports, checking service/version vulnerability records,
+looking up IP reputation, and experimenting with anomaly detection over
+network-like feature data.
 
-✅ 85% coverage
-✅ Full API testing
-✅ Load testing included
-✅ black, flake8
+The full domain model is documented in [`docs/DOMAIN_MODEL.md`](docs/DOMAIN_MODEL.md).
 
----
+## What problem it solves
 
-## 📋 Table of Contents
+The repository gives contributors a local, inspectable toolkit for combining:
 
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [Examples](#examples)
-- [API Reference](#api-reference)
-- [Testing](#testing)
-- [Contributing](#contributing)
-- [License](#license)
+- authorized IPv4 network discovery;
+- TCP port and banner helper functions;
+- local vulnerability lookup for service/version pairs;
+- optional AbuseIPDB IP reputation checks;
+- tabular anomaly-detection model experiments;
+- defensive governance notes for any future deception-related research.
 
----
+It is not a production-ready enterprise scanner, attack framework, exploitation
+toolkit, compliance platform, or distributed scanning system.
 
-## 🛠️ Installation
+## Repository description
 
-### Prerequisites
-- Python 3.8+
-- [Other dependencies]
+Recommended GitHub repository description:
 
-### Setup
+> Defensive Python network-security toolkit for authorized environments: ARP
+> IPv4 host discovery, TCP port/banner helpers, local vulnerability checks,
+> AbuseIPDB reputation lookup, and ML anomaly-detection experiments.
+
+## Implemented features
+
+| Feature | Where it lives | Status |
+|---|---|---|
+| IPv4 ARP discovery | `main.scan_network` | CLI-exposed via `--scan-ip` |
+| TCP port scanning | `utils.scan_port`, `utils.scan_ports`, `main.scan_ports_on_device` | Helper functions; no dedicated CLI flag |
+| Banner grabbing | `utils.banner_grab` | Helper function |
+| Hostname lookup | `utils.get_host_name` | Helper function |
+| Scan result formatting | `utils.format_scan_results` | Helper function |
+| Local vulnerability DB | `vulnerability_assessment.py` | CLI-exposed via `--vuln-check`; uses example seed data |
+| AbuseIPDB lookup | `threat_intelligence.check_ip_abuseipdb` | Direct helper; requires `ABUSE_IP_DB_API_KEY` at import time |
+| NVD keyword lookup helper | `threat_intelligence.assess_vulnerabilities` | Direct helper; not wired into CLI |
+| Isolation Forest anomaly detection | `anomaly_detection.py` | Module and sample CLI path; sample path appears shape-inconsistent |
+| Keras autoencoder anomaly detection | `deep_anomaly_detection.py` | Direct module; packaging dependencies incomplete |
+| Encrypted traffic heuristics | `utils.analyze_encrypted_traffic`, `utils.detect_tls_handshake` | Direct helper functions |
+| Deception-defense constraints | `docs/DECEPTION_DEFENSE_PRINCIPLES.md` | Documentation only |
+
+## Not implemented or unknown
+
+- No web UI or REST API is present.
+- No user account, role, authentication, or approval workflow is implemented.
+- No scan history store or report export workflow is implemented.
+- No plugin runtime is implemented.
+- No IPv6 discovery implementation was found.
+- No distributed scanning architecture was found.
+- No compliance report generator was found.
+- The intended production deployment model is Unknown.
+- The expected real anomaly-detection feature schema is Unknown.
+
+## Installation
+
 ```bash
-# Clone the repository
-git clone https://github.com/[USERNAME]/network-scanner.git
+git clone https://github.com/Victor-Dixon/network-scanner.git
 cd network-scanner
-
-# Create virtual environment
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### API Keys Setup (if required)
-⚠️ **Important**: This project requires API keys for certain features.
+Notes from the current audit:
 
-1. Copy the configuration template:
+- `requirements.txt` includes the main scanner/test dependencies that are
+  known to the repository.
+- `deep_anomaly_detection.py` imports Keras, but no Keras/TensorFlow dependency
+  is listed in `requirements.txt`.
+- `setup.py` metadata does not currently define a working package layout; this
+  repository is most accurately run from the source tree with `python main.py`.
+
+## Configuration
+
+The only documented runtime credential in code is:
+
 ```bash
-cp config.example.json config.json
-# OR
-cp .env.example .env
+export ABUSE_IP_DB_API_KEY=your_abuseipdb_key
 ```
 
-2. Get API keys from the following services:
-   - [Service 1]: [URL]
-   - [Service 2]: [URL]
+`threat_intelligence.py` currently raises `ValueError` during import if
+`ABUSE_IP_DB_API_KEY` is missing. This is a known blocker for offline test
+collection and should be fixed before treating the test suite as stable.
 
-3. Add your keys to the configuration file.
+No `config.json`, `.env.example`, `DATABASE_URL`, `--config`, `--api-key`, or
+`--database-url` implementation was found.
 
-**Never commit real API keys to version control.**
+## Usage
 
----
+Show CLI help:
 
-## ⚙️ Configuration
-
-The application can be configured through:
-
-- **Environment variables** (recommended for production)
-- **Configuration files** (for development)
-- **Command line arguments** (for one-off runs)
-
-### Environment Variables
 ```bash
-export API_KEY=your_api_key_here
-export DATABASE_URL=sqlite:///data/app.db
-export LOG_LEVEL=INFO
-```
-
-### Configuration File
-```json
-{
-  "api_key": "your_api_key_here",
-  "database_url": "sqlite:///data/app.db",
-  "log_level": "INFO"
-}
-```
-
----
-
-## 🚀 Usage
-
-### Basic Usage
-```bash
-# Run the main application
-python main.py
-
-# Run with specific configuration
-python main.py --config config.json
-
-# Show help
 python main.py --help
 ```
 
-### Advanced Usage
-```bash
-# Run with custom settings
-python main.py --api-key YOUR_KEY --database-url YOUR_DB_URL
+Discover hosts on an authorized IPv4 range:
 
-# Run in development mode
-python main.py --debug --log-level DEBUG
+```bash
+python main.py --scan-ip 192.168.1.0/24
 ```
 
----
+Check the local vulnerability database for an exact service/version pair:
 
-## 📖 Examples
+```bash
+python main.py --vuln-check nginx:1.16.1
+```
 
-### Example 1: Basic Setup
+Run the sample anomaly-detection path:
+
+```bash
+python main.py --analyze
+```
+
+Known issue: `--analyze` currently generates 5-feature random data while
+`AnomalyDetectionModel.train` enforces 3 features, so this path appears
+inconsistent with the model contract.
+
+## Direct Python helpers
+
 ```python
-from network_scanner import Network-ScannerClient
+from utils import scan_ports, banner_grab, format_scan_results
+from vulnerability_assessment import assess_vulnerabilities
 
-# Initialize the client
-client = Network-ScannerClient(api_key="your_key")
-result = client.[MAIN_METHOD]()
-print(result)
+open_ports = scan_ports("192.168.1.10", (1, 1024))
+banner = banner_grab("192.168.1.10", 80)
+vulnerabilities = assess_vulnerabilities("nginx", "1.16.1")
+
+print(open_ports)
+print(banner)
+print(vulnerabilities)
 ```
 
-### Example 2: Advanced Configuration
-```python
-import network_scanner as pkg
+## Architecture
 
-# Configure with custom settings
-config = {
-    "api_key": "your_key",
-    "timeout": 30,
-    "retries": 3
-}
+The project currently uses a flat module layout:
 
-client = pkg.create_client(config)
-data = client.fetch_data()
-```
+- `main.py` — CLI entry point and ARP scan orchestration.
+- `utils.py` — socket helpers, formatting, banner grabbing, and traffic
+  heuristics.
+- `vulnerability_assessment.py` — runtime-created SQLite vulnerability store.
+- `threat_intelligence.py` — AbuseIPDB and NVD HTTP helpers.
+- `anomaly_detection.py` — Isolation Forest anomaly model wrapper.
+- `deep_anomaly_detection.py` — Keras autoencoder anomaly functions.
+- `tests/` — pytest/unittest characterization and placeholder tests.
+- `docs/` — domain and defensive-governance documentation.
 
----
+See [`PROJECT_STRUCTURE_TREE.md`](PROJECT_STRUCTURE_TREE.md) for the current
+tree summary.
 
-## 📚 API Reference
+## Testing
 
-### Core Classes
-
-#### `Network-ScannerClient`
-Main client class for interacting with [SERVICE/API].
-
-**Parameters:**
-- `api_key` (str): Your API key
-- `timeout` (int): Request timeout in seconds (default: 30)
-- `retries` (int): Number of retry attempts (default: 3)
-
-**Methods:**
-- `connect()`: Establish connection
-- `fetch_data(query)`: Fetch data with query
-- `disconnect()`: Close connection
-
-### Utility Functions
-
-#### `helper_function(param)`
-Helper function description.
-
-**Parameters:**
-- `param` (str): Parameter description
-
-**Returns:**
-- `result`: Return value description
-
----
-
-## 🧪 Testing
-
-Run the test suite:
 ```bash
-# Run all tests
-pytest
-
-# Run with coverage
-pytest --cov=src
-
-# Run specific test file
-pytest tests/test_specific.py
-
-# Run tests in verbose mode
-pytest -v
+pytest -q
 ```
 
-### Test Structure
-```
-tests/
-├── unit/              # Unit tests
-├── integration/       # Integration tests
-├── fixtures/          # Test data and fixtures
-└── conftest.py        # Test configuration
-```
+Known test and verification blockers:
 
----
+- Importing `threat_intelligence.py` requires `ABUSE_IP_DB_API_KEY`.
+- Some tests rely on optional or missing dependencies depending on the
+  environment, including Keras/TensorFlow for `deep_anomaly_detection.py`.
+- `tests/test_basic.py` contains generic placeholder tests and pytest marks
+  that are not registered in a `pytest.ini`.
+- The CI workflow `.github/workflows/ci.yml` allows test failures to continue;
+  `.github/workflows/tests.yml` runs pytest as a stricter test workflow.
 
-## 🤝 Contributing
+Historical blocker details are captured in
+`.dreamos_reports/pytest_blocker.txt`.
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+## Current project status
 
-### Development Setup
-```bash
-# Fork and clone
-git clone https://github.com/[USERNAME]/network-scanner.git
-cd network-scanner
+Status source-of-truth documents:
 
-# Install development dependencies
-pip install -r requirements-dev.txt
+- [`PRD.md`](PRD.md) — product scope and domain requirements.
+- [`ROADMAP.md`](ROADMAP.md) — current, next, and later work.
+- [`MASTER_TASK_LIST.md`](MASTER_TASK_LIST.md) — task backlog and completion
+  state.
+- [`MASTER_TASK_LOG.md`](MASTER_TASK_LOG.md) — dated project execution log.
+- [`NEXT_UP.md`](NEXT_UP.md) — immediate next work.
+- [`PRODUCTION_READINESS.md`](PRODUCTION_READINESS.md) — honest readiness
+  gates.
+- [`AGENTS.md`](AGENTS.md) — contributor/agent operating rules.
 
-# Run tests
-pytest
+Current readiness: **not production-ready**. The codebase is useful as a
+defensive security diagnostics and research toolkit, but documentation,
+packaging, offline tests, and some CLI paths need hardening.
 
-# Run linting
-flake8 src/
-black src/
-```
+## Roadmap summary
 
-### Pull Request Process
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Ensure all tests pass
-6. Update documentation if needed
-7. Submit a pull request
+Immediate work should focus on making the current behavior reliable before
+adding new product scope:
 
----
+1. Remove import-time API-key failure from `threat_intelligence.py`.
+2. Make threat-intelligence tests offline and mocked by default.
+3. Register pytest markers and remove placeholder tests.
+4. Fix or document missing runtime dependencies for deep anomaly detection.
+5. Reconcile CLI anomaly sample data with the 3-feature model contract.
+6. Clarify or fix package metadata and console entry point.
 
-## 📄 License
+Future ideas from `plans.txt` include IPv6 support, OS fingerprinting,
+additional threat-intelligence feeds, automated vulnerability data ingestion,
+compliance reporting, scanning profiles, distributed scanning, UEBA, and plugin
+architecture. These are not implemented unless explicitly noted above.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Contributing
 
----
+- Keep scans and tests offline/mocked unless a target is explicitly authorized.
+- Do not commit API keys, `.env` files, local databases, virtualenvs, or scan
+  artifacts.
+- Update the domain model and status docs whenever behavior or scope changes.
+- Prefer small, evidence-backed changes over broad rewrites.
 
-## 🙏 Acknowledgments
+## License
 
-- [Library/Framework 1] for [purpose]
-- [Library/Framework 2] for [purpose]
-- Community contributors
-
----
-
-## 📞 Support
-
-- **Issues**: [GitHub Issues](https://github.com/[USERNAME]/network-scanner/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/[USERNAME]/network-scanner/discussions)
-- **Email**: [contact email]
-
----
-
-**Made with ❤️ by AI Assistant**
-
-**network-scanner** - Advanced network-scanner solution
-
-<!-- DREAMVAULT_PORTFOLIO_README:BEGIN schema=v1 generated="2026-06-29T02:03:42Z" -->
-## Portfolio status
-
-**Network recon tools** — Network scanning and security reconnaissance utilities.
-
-| Field | Value |
-|---|---|
-| **Canonical ID** | `network-scanner` |
-| **Bucket** | unclassified |
-| **Action** | — |
-| **GitHub** | [network-scanner](https://github.com/Victor-Dixon/network-scanner) |
-
-### Repository inventory
-
-*Filesystem scan at `2026-06-29T02:03:42Z` — regenerate via `python runtime/scripts/sync_portfolio_readmes_001.py`.*
-
-| Signal | Value |
-|---|---|
-| Python files | 16 |
-| Test files | 9 |
-| CI workflows | 2 |
-| runtime/tasks YAML | 1 |
-| pyproject.toml | no |
-| package.json | no |
-| tests/ directory | yes |
-| Git branch | master |
-| Working tree | dirty |
-
-**Top-level directories:** .dreamos_reports, .github, .project, docs, runtime, tests
-
-**Top-level files:** .gitattributes, .gitignore, AGENTS.md, CONSOLIDATION_MANIFEST.md, LICENSE, MASTER_TASK_LIST.md, MASTER_TASK_LOG.md, NEXT_UP.md, PRD.md, PRODUCTION_READINESS.md, PROJECT_STRUCTURE_TREE.md, README.md, ROADMAP.md, anomaly_detection.py, deep_anomaly_detection.py, main.py, plans.txt, requirements.txt, setup.py, threat_intelligence.py, utils.py, vulnerabilities.db, vulnerability_assessment.py
-
-### Consolidation signals
-
-- No pyproject.toml or package.json — packaging boundary unclear.
-- 1 runtime/tasks YAML files — may overlap DreamVault lanes.
-
-### Run / verify
-
-- `pip install -r requirements.txt`
-<!-- DREAMVAULT_PORTFOLIO_README:END schema=v1 generated="2026-06-29T02:03:42Z" -->
+This project is licensed under the MIT License. See [`LICENSE`](LICENSE).
