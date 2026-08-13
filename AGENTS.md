@@ -22,51 +22,11 @@ compliance platform, distributed scanner, or plugin runtime.
 If architecture, intent, or behavior cannot be verified from code or docs, mark
 it as **Unknown** instead of guessing.
 
-## Key surfaces
-
-- `main.py` — CLI entry point (`--scan-ip`, `--analyze`, `--vuln-check`) and
-  ARP discovery orchestration.
-- `utils.py` — socket helpers, hostname lookup, port scanning, banner grabbing,
-  scan-result formatting, and encrypted-traffic heuristics.
-- `vulnerability_assessment.py` — local SQLite vulnerability table, example
-  data seed, and exact service/version lookup.
-- `threat_intelligence.py` — AbuseIPDB IP reputation helper and NVD keyword
-  helper; currently requires `ABUSE_IP_DB_API_KEY` at import time.
-- `anomaly_detection.py` — Isolation Forest anomaly model wrapper with a
-  3-feature training contract.
-- `deep_anomaly_detection.py` — Keras autoencoder anomaly-detection functions.
-- `docs/DECEPTION_DEFENSE_PRINCIPLES.md` — governance constraints for any
-  future deception-related research.
-- `tests/` — pytest/unittest suite; contains both characterization tests and
-  generic placeholders.
-- `.github/workflows/` — CI/test workflows.
-
 ## Current state
 
-The repository is documentation-synchronized as of 2026-07-03 but remains **not
-production-ready**. Full pytest collection may be blocked by:
-
-- import-time `ABUSE_IP_DB_API_KEY` validation in `threat_intelligence.py`;
-- missing or optional deep-learning dependencies for `deep_anomaly_detection.py`;
-- unregistered pytest markers;
-- placeholder tests in `tests/test_basic.py`;
-- possible `main.py --analyze` mismatch between 5-feature sample data and the
-  3-feature anomaly model contract.
-
-## Completed
-
-- Governance artifact baseline.
-- Defensive deception principles.
-- Implementation-derived domain model.
-- README/PRD/roadmap/task/readiness docs synchronized to current code evidence.
-
-## Next work
-
-1. Refactor AbuseIPDB credential handling to avoid import-time failure.
-2. Keep threat-intelligence tests mocked and offline.
-3. Register pytest markers and remove placeholder tests.
-4. Reconcile anomaly CLI sample data with the model contract.
-5. Clarify Keras/TensorFlow and packaging metadata gaps.
+The repository remains **not production-ready**. Full pytest collection may be
+blocked by credential handling, optional deep-learning dependencies,
+unregistered markers, placeholder tests, and anomaly CLI/model mismatch.
 
 ## Rules
 
@@ -79,3 +39,18 @@ production-ready**. Full pytest collection may be blocked by:
   defensive-governance docs, and threat-intelligence integrations.
 - Treat outputs as defensive security diagnostics only.
 - Do not invent architecture, product requirements, or implemented features.
+
+## Standard Repository Working Contract
+1. Read `AGENTS.md`, `NEXT_UP.md`, `MASTER_TASK_LIST.md`, `MASTER_TASK_LOG.md`, any repo SSOT/state manifest, branch/HEAD, and relevant tests before editing.
+2. Work one bounded lane with explicit **TARGET, ACTION, VERIFY, COMMIT**. Do not mix unrelated cleanup, features, migrations, or speculative rewrites.
+3. Use Fast TDD: smallest acceptance test, smallest safe change, targeted verification, then broad verification.
+4. When repo state changes, update `NEXT_UP.md` and `MASTER_TASK_LIST.md` in the same lane, plus the execution-state SSOT when present.
+5. Append `MASTER_TASK_LOG.md` only after verification proves closure. Never record planned or merely implemented work as completed.
+6. For non-trivial work, create/update `runtime/tasks/*.yaml` with objective, scope, acceptance, verification, holds, and next lane when supported.
+7. Trust but verify: targeted tests, repo validators, `git diff --check`, and final status/diff review. PASS/COMPLETE/deployed/merged claims require evidence.
+8. Salvage before destructive cleanup. Classify variants/donor material before delete/reset/rewrite; preserve canonical source unless evidence proves it stale.
+9. End code or repo-structure work with a clean scoped commit. Planning-only work still requires synchronized task surfaces and verification.
+10. Leave the next executable step in `NEXT_UP.md` with its verification gate so the next agent does not rediscover the lane.
+
+### Canonical Planning Names
+Fleet-standard root planning names are `NEXT_UP.md`, `MASTER_TASK_LIST.md`, and `MASTER_TASK_LOG.md`. Existing explicit repo SSOTs remain authoritative until deliberately migrated; compatibility mirrors must not become competing authorities.
