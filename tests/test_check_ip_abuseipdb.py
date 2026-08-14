@@ -5,6 +5,13 @@ import requests
 
 class TestCheckIPAbuseIPDB(unittest.TestCase):
 
+    def setUp(self):
+        self.env_patcher = patch.dict("os.environ", {"ABUSE_IP_DB_API_KEY": "test-key"})
+        self.env_patcher.start()
+
+    def tearDown(self):
+        self.env_patcher.stop()
+
     @patch('threat_intelligence.requests.get')
     def test_valid_ip(self, mock_get):
         # Simulate a successful API response

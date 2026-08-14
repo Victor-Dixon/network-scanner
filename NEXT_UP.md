@@ -1,6 +1,6 @@
 # NEXT UP
 
-**Updated:** 2026-07-03  
+**Updated:** 2026-08-14  
 **Domain:** defensive network security diagnostics for authorized environments.
 
 ## What this project is
@@ -16,6 +16,12 @@ network/security-signal experimentation.
 
 ## Completed most recently
 
+- Removed the AbuseIPDB import-time API-key failure and kept missing credentials
+  as a call-time `None` result.
+- Updated AbuseIPDB tests to use mocked credentials and mocked HTTP calls.
+- Lazily imported `scapy` only when ARP scanning is invoked.
+- Registered pytest markers in `pytest.ini`.
+- Verified `python3 -m pytest -q`: `56 passed`.
 - Added a complete domain model in `docs/DOMAIN_MODEL.md`.
 - Replaced placeholder README content with implementation-derived project
   documentation.
@@ -29,15 +35,12 @@ Stabilize existing behavior and tests before adding new features.
 
 ## Work next
 
-1. Refactor `threat_intelligence.py` so missing `ABUSE_IP_DB_API_KEY` fails at
-   `check_ip_abuseipdb` call time, not import time.
-2. Update AbuseIPDB tests to be fully mocked and offline-safe.
-3. Register pytest markers (`unit`, `integration`, `slow`) in pytest config.
-4. Remove or replace generic placeholder tests in `tests/test_basic.py`.
-5. Reconcile `main.py --analyze` with the 3-feature model contract in
+1. Remove or replace remaining generic placeholder tests in `tests/test_basic.py`.
+2. Reconcile `main.py --analyze` with the 3-feature model contract in
    `AnomalyDetectionModel`.
-6. Clarify Keras/TensorFlow dependency handling for `deep_anomaly_detection.py`.
-7. Clarify or fix stale package metadata and console entry point.
+3. Clarify Keras/TensorFlow dependency handling for `deep_anomaly_detection.py`.
+4. Clarify or fix stale package metadata and console entry point.
+5. Add an explicit no-network/default-offline test lane.
 
 ## Verify
 
@@ -47,10 +50,7 @@ Expected verification command:
 python3 -m pytest -q
 ```
 
-Latest verification on 2026-07-03 after installing `requirements.txt` failed
-during collection because:
+Latest verification on 2026-08-14 passed:
 
-- `threat_intelligence.py` validates `ABUSE_IP_DB_API_KEY` during import;
-- `deep_anomaly_detection.py` imports Keras, which is not installed by
-  `requirements.txt`;
-- pytest markers `slow`, `unit`, and `integration` are not registered.
+- `python3 -m pytest -q`: `56 passed`
+- `git diff --check`: PASS

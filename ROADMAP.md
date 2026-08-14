@@ -1,6 +1,6 @@
 # Roadmap
 
-**Updated:** 2026-07-03  
+**Updated:** 2026-08-14  
 **Domain:** defensive network security diagnostics for authorized environments.
 
 ## What this project is
@@ -27,32 +27,29 @@ security-signal analysis.
   encrypted-traffic heuristics, AbuseIPDB lookup, NVD keyword lookup, and two
   anomaly-detection approaches.
 - Characterization tests exist for core modules.
+- Default pytest now passes offline with mocked AbuseIPDB behavior.
+- Pytest markers are registered in `pytest.ini`.
 
 ## Current focus
 
 Stabilize current behavior and documentation before adding new features:
 
 1. Keep docs synchronized with implementation and mark Unknowns explicitly.
-2. Treat the repository as not production-ready until tests collect offline and
-   CLI paths are reconciled.
+2. Treat the repository as not production-ready until packaging/dependency
+   boundaries and CLI paths are reconciled.
 3. Preserve separation between packet scanning, ML anomaly detection,
    vulnerability lookup, and threat-intelligence integrations.
 
 ## Next
 
-1. Refactor `threat_intelligence.py` so missing `ABUSE_IP_DB_API_KEY` fails at
-   AbuseIPDB call time, not import time.
-2. Update AbuseIPDB tests so they are fully mocked and do not require real
-   credentials.
-3. Register pytest markers (`unit`, `integration`, `slow`) in a pytest
-   configuration file.
-4. Remove or replace generic placeholder tests in `tests/test_basic.py`.
-5. Reconcile `main.py --analyze` sample data with
+1. Remove or replace remaining generic placeholder tests in `tests/test_basic.py`.
+2. Reconcile `main.py --analyze` sample data with
    `AnomalyDetectionModel`'s 3-feature contract.
-6. Document or add the missing Keras/TensorFlow dependency path for
+3. Document or add the missing Keras/TensorFlow dependency path for
    `deep_anomaly_detection.py`.
-7. Clarify package layout and the currently stale `setup.py` console entry
+4. Clarify package layout and the currently stale `setup.py` console entry
    point.
+5. Add an explicit no-network/default-offline test lane.
 
 ## Later
 

@@ -4,6 +4,15 @@ import argparse
 from main import main
 
 class TestMain(unittest.TestCase):
+    def setUp(self):
+        self.initialize_database_patcher = patch('main.initialize_database')
+        self.fetch_vulnerability_data_patcher = patch('main.fetch_vulnerability_data')
+        self.initialize_database_patcher.start()
+        self.fetch_vulnerability_data_patcher.start()
+
+    def tearDown(self):
+        self.fetch_vulnerability_data_patcher.stop()
+        self.initialize_database_patcher.stop()
 
     @patch('main.scan_network')
     @patch('main.check_ip_abuseipdb')

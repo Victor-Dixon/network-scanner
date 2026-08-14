@@ -7,10 +7,7 @@ import os
 load_dotenv()
 
 # Retrieve the API key from environment variables
-ABUSE_IP_DB_API_KEY = os.getenv("ABUSE_IP_DB_API_KEY")
-
-if not ABUSE_IP_DB_API_KEY:
-    raise ValueError("Missing ABUSE_IP_DB_API_KEY. Please set it in the .env file.")
+ABUSE_IP_DB_API_KEY_ENV = "ABUSE_IP_DB_API_KEY"
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -28,10 +25,15 @@ def check_ip_abuseipdb(ip_address):
         dict: The response data from AbuseIPDB if successful.
         None: If the request fails or the IP address is not found.
     """
+    api_key = os.getenv(ABUSE_IP_DB_API_KEY_ENV)
+    if not api_key:
+        logging.error("Missing %s. Please set it in the .env file.", ABUSE_IP_DB_API_KEY_ENV)
+        return None
+
     url = "https://api.abuseipdb.com/api/v2/check"
     headers = {
         'Accept': 'application/json',
-        'Key': ABUSE_IP_DB_API_KEY
+        'Key': api_key
     }
     params = {
         'ipAddress': ip_address,

@@ -82,21 +82,17 @@ class TestErrorHandling:
 
     def test_invalid_input(self):
         """Test handling of invalid input."""
-        # Arrange
-        invalid_data = None
+        from main import scan_network
 
-        # Act & Assert
         with pytest.raises((ValueError, TypeError)):
-            # Call function with invalid data
-            pass
+            scan_network("not-an-ip-range")
 
-    def test_missing_dependencies(self):
-        """Test graceful handling of missing dependencies."""
-        with patch('builtins.open', side_effect=FileNotFoundError):
-            # Act & Assert
-            with pytest.raises(FileNotFoundError):
-                # Call function that requires file
-                pass
+    def test_missing_api_key_returns_none(self, monkeypatch):
+        """Test graceful handling of missing AbuseIPDB credentials."""
+        from threat_intelligence import check_ip_abuseipdb
+
+        monkeypatch.delenv("ABUSE_IP_DB_API_KEY", raising=False)
+        assert check_ip_abuseipdb("8.8.8.8") is None
 
 
 class TestPerformance:

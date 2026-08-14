@@ -1,7 +1,7 @@
 # Production Readiness — network-scanner
 
 **Status:** NOT production-ready (honest baseline)  
-**Updated:** 2026-07-03  
+**Updated:** 2026-08-14  
 **Domain:** defensive network security diagnostics for authorized environments.
 
 ## What this project is
@@ -26,7 +26,7 @@ not as a production scanner or offensive tool.
 | Agent/contributor rules | PASS | `AGENTS.md` |
 | Project tree docs | PASS | `PROJECT_STRUCTURE_TREE.md` |
 | CI workflows present | PASS | `.github/workflows/ci.yml`, `.github/workflows/tests.yml` |
-| Tests | BLOCKED | import-time API key requirement, dependency/marker/placeholders noted below |
+| Tests | PASS | `python3 -m pytest -q`: `56 passed` |
 | Packaging metadata | BLOCKED | flat modules; stale console entry point documented |
 | License | PASS | `LICENSE` (MIT) |
 | No committed secrets | REVIEW | no secrets observed in docs audit; continue to keep API keys in env only |
@@ -43,17 +43,11 @@ not as a production scanner or offensive tool.
 
 ## Blocking issues
 
-- Latest local verification on 2026-07-03:
-  - `python3 -m py_compile setup.py` passed.
-  - `python3 -m pytest -q` failed during collection after installing
-    `requirements.txt`.
-- `threat_intelligence.py` fails at import when `ABUSE_IP_DB_API_KEY` is
-  missing.
-- Full pytest collection can require credentials or dependencies that should be
-  optional/mocked.
+- Latest local verification on 2026-08-14:
+  - `python3 -m pytest -q`: `56 passed`.
+  - `git diff --check`: PASS.
 - `deep_anomaly_detection.py` imports Keras, but Keras/TensorFlow dependency
   handling is not documented in package metadata.
-- Pytest markers (`unit`, `integration`, `slow`) are not registered.
 - `tests/test_basic.py` contains generic placeholder tests.
 - `main.py --analyze` appears inconsistent: it generates 5-feature sample data
   while `AnomalyDetectionModel` enforces 3 features.
@@ -62,10 +56,10 @@ not as a production scanner or offensive tool.
 
 ## What remains
 
-1. Make tests collect offline without API keys.
-2. Resolve dependency and package metadata gaps.
-3. Reconcile anomaly CLI behavior with model contract.
-4. Replace placeholder tests with product-specific tests.
+1. Resolve dependency and package metadata gaps.
+2. Reconcile anomaly CLI behavior with model contract.
+3. Replace remaining placeholder tests with product-specific tests.
+4. Add an explicit no-network/default-offline test lane.
 5. Decide which future `plans.txt` items become accepted product scope.
 
 ## Client-show criteria

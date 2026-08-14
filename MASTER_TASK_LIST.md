@@ -27,12 +27,12 @@ can audit, test, and harden without assuming unimplemented architecture.
 
 ## P0 — Test stability and offline safety
 
-- [ ] Fix import-time `ABUSE_IP_DB_API_KEY` failure in `threat_intelligence.py`.
-- [ ] Mock AbuseIPDB tests so pytest collection never requires real API keys.
-- [ ] Register pytest markers: `unit`, `integration`, `slow`.
+- [x] Fix import-time `ABUSE_IP_DB_API_KEY` failure in `threat_intelligence.py`.
+- [x] Mock AbuseIPDB tests so pytest collection never requires real API keys.
+- [x] Register pytest markers: `unit`, `integration`, `slow`.
 - [ ] Remove or replace generic placeholder tests in `tests/test_basic.py`.
 - [ ] Add a no-network/default-offline test lane.
-- [ ] Re-run pytest and update blocker docs after fixes.
+- [x] Re-run pytest and update blocker docs after fixes.
 
 ## P0 — Current behavior consistency
 

@@ -2,7 +2,6 @@ import argparse
 import logging
 import ipaddress
 import numpy as np
-from scapy.all import srp, Ether, ARP
 from anomaly_detection import AnomalyDetectionModel
 from threat_intelligence import check_ip_abuseipdb
 from vulnerability_assessment import (
@@ -25,6 +24,11 @@ def scan_network(ip_range):
         ipaddress.ip_network(ip_range, strict=False)
     except ValueError:
         raise ValueError(f"Invalid IP address format: {ip_range}")
+
+    try:
+        from scapy.all import ARP, Ether, srp
+    except ImportError as exc:
+        raise RuntimeError("scapy is required for network scanning. Install requirements.txt.") from exc
 
     logging.info(f"Scanning network range: {ip_range}")
     arp = ARP(pdst=ip_range)

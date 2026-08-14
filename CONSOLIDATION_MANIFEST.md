@@ -1,6 +1,6 @@
 # Consolidation Manifest
 
-**Updated:** 2026-07-03
+**Updated:** 2026-08-14
 
 ## Repo role
 
@@ -17,7 +17,7 @@ anomaly-detection toolkit for authorized environments.
 
 ## Current classification
 
-DEFENSIVE-SECURITY / DOCUMENTATION-SYNCHRONIZED / TEST-BLOCKED /
+DEFENSIVE-SECURITY / DOCUMENTATION-SYNCHRONIZED / DEFAULT-TESTS-PASS /
 NOT-PRODUCTION-READY
 
 ## Completed
@@ -27,14 +27,16 @@ NOT-PRODUCTION-READY
 - Documentation-first domain model audit.
 - README/PRD/roadmap/task/readiness docs synchronized to implementation
   evidence.
+- Default pytest stabilized with mocked AbuseIPDB behavior and registered
+  markers.
 
 ## Promotion candidates
 
 - `utils.py` TCP port, banner, hostname, formatting, and traffic heuristic
   helpers.
 - `vulnerability_assessment.py` local SQLite vulnerability lookup.
-- `threat_intelligence.py` AbuseIPDB/NVD helper functions after credential and
-  test isolation fixes.
+- `threat_intelligence.py` AbuseIPDB/NVD helper functions after packaging and
+  no-network lane review.
 - `anomaly_detection.py` Isolation Forest wrapper after CLI/model contract is
   reconciled.
 - `deep_anomaly_detection.py` autoencoder functions after dependency handling is
@@ -42,10 +44,7 @@ NOT-PRODUCTION-READY
 
 ## Blockers
 
-- AbuseIPDB key required at import time.
-- Full pytest is not reliably offline/mocked.
 - Keras/TensorFlow dependency handling is missing for deep anomaly detection.
-- Pytest markers are unregistered.
 - Generic placeholder tests remain in `tests/test_basic.py`.
 - `main.py --analyze` appears inconsistent with the 3-feature anomaly model
   contract.

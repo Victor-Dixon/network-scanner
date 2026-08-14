@@ -45,6 +45,19 @@ authorized environments.
 - Added governance docs; artifact contract 2/9 -> 9/9.
 - Removed tracked venv on `main`; fixed CI badge URL.
 
+## 2026-08-14 — Close default test-stability lane
+
+- Removed the import-time `ABUSE_IP_DB_API_KEY` hard failure from `threat_intelligence.py`.
+- Kept AbuseIPDB failure closed at call time when credentials are missing.
+- Added mocked credential setup for AbuseIPDB tests.
+- Lazily imported `scapy` inside ARP scanning so non-scan tests can collect without packet-scanning dependencies at import time.
+- Registered pytest markers in `pytest.ini`.
+
+### Evidence
+
+- `pytest -q`: PASS, `56 passed`
+- `git diff --check`: PASS
+
 ## 2026-05-07
 
 - Added governance artifact baseline.

@@ -5,6 +5,14 @@ import requests
 
 class TestThreatIntelligence(unittest.TestCase):
 
+    def setUp(self):
+        self.env_patcher = patch.dict("os.environ", {"ABUSE_IP_DB_API_KEY": "test-key"})
+        self.env_patcher.start()
+
+    def tearDown(self):
+        if self.env_patcher is not None:
+            self.env_patcher.stop()
+
     @patch('threat_intelligence.requests.get')
     def test_valid_ip(self, mock_get):
         # Simulate a successful API response
@@ -43,6 +51,8 @@ class TestThreatIntelligence(unittest.TestCase):
 
     @patch('threat_intelligence.requests.get')
     def test_missing_api_key(self, mock_get):
+        self.env_patcher.stop()
+        self.env_patcher = None
         # Simulate a 401 Unauthorized response due to missing API key
         mock_get.return_value.status_code = 401
         mock_get.return_value.json.return_value = {

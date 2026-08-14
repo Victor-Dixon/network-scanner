@@ -53,7 +53,7 @@ Recommended GitHub repository description:
 | Hostname lookup | `utils.get_host_name` | Helper function |
 | Scan result formatting | `utils.format_scan_results` | Helper function |
 | Local vulnerability DB | `vulnerability_assessment.py` | CLI-exposed via `--vuln-check`; uses example seed data |
-| AbuseIPDB lookup | `threat_intelligence.check_ip_abuseipdb` | Direct helper; requires `ABUSE_IP_DB_API_KEY` at import time |
+| AbuseIPDB lookup | `threat_intelligence.check_ip_abuseipdb` | Direct helper; missing `ABUSE_IP_DB_API_KEY` returns `None` at call time |
 | NVD keyword lookup helper | `threat_intelligence.assess_vulnerabilities` | Direct helper; not wired into CLI |
 | Isolation Forest anomaly detection | `anomaly_detection.py` | Module and sample CLI path; sample path appears shape-inconsistent |
 | Keras autoencoder anomaly detection | `deep_anomaly_detection.py` | Direct module; packaging dependencies incomplete |
@@ -102,9 +102,8 @@ The only documented runtime credential in code is:
 export ABUSE_IP_DB_API_KEY=your_abuseipdb_key
 ```
 
-`threat_intelligence.py` currently raises `ValueError` during import if
-`ABUSE_IP_DB_API_KEY` is missing. This is a known blocker for offline test
-collection and should be fixed before treating the test suite as stable.
+Missing `ABUSE_IP_DB_API_KEY` returns `None` when `check_ip_abuseipdb` is
+called. Importing `threat_intelligence.py` does not require a real key.
 
 No `config.json`, `.env.example`, `DATABASE_URL`, `--config`, `--api-key`, or
 `--database-url` implementation was found.
@@ -177,14 +176,15 @@ tree summary.
 python3 -m pytest -q
 ```
 
-Known test and verification blockers:
+Latest verification:
 
-- Importing `threat_intelligence.py` requires `ABUSE_IP_DB_API_KEY`.
-- Latest local verification after `python3 -m pip install -r requirements.txt`
-  still fails during collection because Keras/TensorFlow is not installed for
-  `deep_anomaly_detection.py`.
-- `tests/test_basic.py` contains generic placeholder tests and pytest marks
-  that are not registered in a `pytest.ini`.
+- `python3 -m pytest -q`: `56 passed`
+
+Known remaining test and verification work:
+
+- Keras/TensorFlow dependency handling for `deep_anomaly_detection.py` is not
+  documented in package metadata.
+- `tests/test_basic.py` still contains some generic placeholder tests.
 - The CI workflow `.github/workflows/ci.yml` allows test failures to continue;
   `.github/workflows/tests.yml` runs pytest as a stricter test workflow.
 
@@ -214,12 +214,11 @@ packaging, offline tests, and some CLI paths need hardening.
 Immediate work should focus on making the current behavior reliable before
 adding new product scope:
 
-1. Remove import-time API-key failure from `threat_intelligence.py`.
-2. Make threat-intelligence tests offline and mocked by default.
-3. Register pytest markers and remove placeholder tests.
-4. Fix or document missing runtime dependencies for deep anomaly detection.
-5. Reconcile CLI anomaly sample data with the 3-feature model contract.
-6. Clarify or fix package metadata and console entry point.
+1. Replace remaining placeholder tests with product-specific tests.
+2. Fix or document missing runtime dependencies for deep anomaly detection.
+3. Reconcile CLI anomaly sample data with the 3-feature model contract.
+4. Clarify or fix package metadata and console entry point.
+5. Add an explicit no-network/default-offline test lane.
 
 Future ideas from `plans.txt` include IPv6 support, OS fingerprinting,
 additional threat-intelligence feeds, automated vulnerability data ingestion,
