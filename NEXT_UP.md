@@ -22,16 +22,28 @@ The repository default and current product authority is `master`, but a separate
 **Current state**
 
 - `master` is canonical/default.
-- Current `master` has the 2026-08-14 test-stability closure with `56 passed` recorded in repository evidence.
+- Current `master` has the 2026-08-14 local test-stability closure with `56 passed` recorded in repository evidence.
 - `main` is 3 commits ahead and 14 commits behind current `master`.
 - Its unique history includes governance/docs plus removal of a tracked virtualenv/tooling tree relative to the common ancestor.
 - Existing history states the virtualenv was never tracked on `master`, so the branch cannot be treated as a required cleanup patch without further proof.
 - Classify `main` as `DIVERGED_LEGACY / SALVAGE_CANDIDATE` pending semantic reconciliation.
-- No open pull request owned `main` at this standardization audit.
+- No open pull request owned `main` at the start of this standardization audit.
+
+## Exact-head acceptance state for this planner lane
+
+At PR head `930305f691e9001350fc99b529f67cc197ddf4ab`:
+
+- `CI/CD Pipeline` run `31932994990`: `completed / success`.
+- `Tests` run `31932994992`: `completed / failure`.
+- Failing collection path: `tests/test_deep_anomaly_detection.py` -> `deep_anomaly_detection.py` -> `from keras.models import ...`.
+- Concrete blocker: `ModuleNotFoundError: No module named 'keras'`.
+
+This is consistent with the existing `MASTER_TASK_LIST.md` item to clarify Keras/TensorFlow dependency handling. Therefore `CI_VERIFIED=false`; the prior local `56 passed` evidence is preserved as historical local proof, not substituted for current GitHub Actions proof.
 
 **Blockers**
 
 - Determine whether any of the three branch-only commits still contain value not already represented on `master`.
+- Current GitHub Actions Tests baseline is red on the documented Keras dependency gap.
 
 **Done evidence**
 
@@ -50,9 +62,9 @@ The repository default and current product authority is `master`, but a separate
 
 ## Following lanes
 
-2. Remove or replace remaining generic placeholder tests in `tests/test_basic.py`.
-3. Reconcile `main.py --analyze` with the 3-feature `AnomalyDetectionModel` contract.
-4. Clarify Keras/TensorFlow handling for `deep_anomaly_detection.py`.
+2. Resolve the current CI collection blocker by clarifying Keras/TensorFlow handling for `deep_anomaly_detection.py` without making deep learning mandatory unless product authority requires it.
+3. Remove or replace remaining generic placeholder tests in `tests/test_basic.py`.
+4. Reconcile `main.py --analyze` with the 3-feature `AnomalyDetectionModel` contract.
 5. Clarify or fix stale package metadata and console entry point.
 6. Add an explicit default-offline/no-network test lane.
 
@@ -62,4 +74,4 @@ The repository default and current product authority is `master`, but a separate
 python3 -m pytest -q
 ```
 
-Latest verified repository evidence before this planner-only lane: `56 passed` on 2026-08-14. No new CI/pass claim is created by this documentation-only reconciliation.
+Latest local repository evidence before this planner-only lane: `56 passed` on 2026-08-14. Current exact-head GitHub Actions Tests evidence is red as documented above.
