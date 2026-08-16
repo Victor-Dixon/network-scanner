@@ -1,56 +1,77 @@
 # NEXT UP
 
-**Updated:** 2026-08-14  
+**Reconciled:** 2026-08-16  
 **Domain:** defensive network security diagnostics for authorized environments.
 
-## What this project is
+## Highest-priority executable lane
 
-`network-scanner` is a Python toolkit for authorized IPv4 host discovery,
-port/banner helper functions, local vulnerability lookup, IP reputation checks,
-and anomaly-detection experiments.
+### Reconcile divergent legacy branch `main` against canonical `master`
 
-## Why it exists
+**Why it exists**
 
-It provides an inspectable defensive security diagnostics codebase for local
-network/security-signal experimentation.
+The repository default and current product authority is `master`, but a separate `main` branch remains diverged. Historical task-log evidence says governance work and tracked-virtualenv cleanup occurred on `main` and governance commits were later cherry-picked to `master`; current Git ancestry still shows unique commits on `main`, so branch deletion or wholesale merge is not justified without semantic review.
 
-## Completed most recently
+**Authority/source**
 
-- Removed the AbuseIPDB import-time API-key failure and kept missing credentials
-  as a call-time `None` result.
-- Updated AbuseIPDB tests to use mocked credentials and mocked HTTP calls.
-- Lazily imported `scapy` only when ARP scanning is invoked.
-- Registered pytest markers in `pytest.ini`.
-- Verified `python3 -m pytest -q`: `56 passed`.
-- Added a complete domain model in `docs/DOMAIN_MODEL.md`.
-- Replaced placeholder README content with implementation-derived project
-  documentation.
-- Synchronized PRD, roadmap, master task list/log, production readiness,
-  project structure, consolidation, and AGENTS docs.
-- Recorded Unknowns instead of assuming missing architecture or requirements.
+- `AGENTS.md` salvage-before-delete contract
+- `MASTER_TASK_LOG.md` 2026-07-01 branch history
+- `MASTER_TASK_LIST.md`
+- current Git branch/commit comparison
+- current `master` implementation/tests
 
-## Current focus
+**Current state**
 
-Stabilize existing behavior and tests before adding new features.
+- `master` is canonical/default.
+- Current `master` has the 2026-08-14 local test-stability closure with `56 passed` recorded in repository evidence.
+- `main` is 3 commits ahead and 14 commits behind current `master`.
+- Its unique history includes governance/docs plus removal of a tracked virtualenv/tooling tree relative to the common ancestor.
+- Existing history states the virtualenv was never tracked on `master`, so the branch cannot be treated as a required cleanup patch without further proof.
+- Classify `main` as `DIVERGED_LEGACY / SALVAGE_CANDIDATE` pending semantic reconciliation.
+- No open pull request owned `main` at the start of this standardization audit.
 
-## Work next
+## Exact-head acceptance state for this planner lane
 
-1. Remove or replace remaining generic placeholder tests in `tests/test_basic.py`.
-2. Reconcile `main.py --analyze` with the 3-feature model contract in
-   `AnomalyDetectionModel`.
-3. Clarify Keras/TensorFlow dependency handling for `deep_anomaly_detection.py`.
-4. Clarify or fix stale package metadata and console entry point.
-5. Add an explicit no-network/default-offline test lane.
+At PR head `930305f691e9001350fc99b529f67cc197ddf4ab`:
 
-## Verify
+- `CI/CD Pipeline` run `31932994990`: `completed / success`.
+- `Tests` run `31932994992`: `completed / failure`.
+- Failing collection path: `tests/test_deep_anomaly_detection.py` -> `deep_anomaly_detection.py` -> `from keras.models import ...`.
+- Concrete blocker: `ModuleNotFoundError: No module named 'keras'`.
 
-Expected verification command:
+This is consistent with the existing `MASTER_TASK_LIST.md` item to clarify Keras/TensorFlow dependency handling. Therefore `CI_VERIFIED=false`; the prior local `56 passed` evidence is preserved as historical local proof, not substituted for current GitHub Actions proof.
+
+**Blockers**
+
+- Determine whether any of the three branch-only commits still contain value not already represented on `master`.
+- Current GitHub Actions Tests baseline is red on the documented Keras dependency gap.
+
+**Done evidence**
+
+1. Each unique `main` commit/file change is classified `ALREADY_PROMOTED`, `HISTORICAL_REFERENCE`, `PROMOTE`, or `REJECT`.
+2. Any retained value is ported onto a fresh branch based on current `master`; do not merge the divergent branch wholesale.
+3. `main` is not deleted until all unique value is accounted for and canonical branch policy is explicit.
+4. `MASTER_TASK_LIST.md`, `MASTER_TASK_LOG.md`, and `NEXT_UP.md` are reconciled after the decision.
+
+**Do not work concurrently on**
+
+- destructive branch cleanup;
+- new scanner features;
+- live/intrusive network activity;
+- anomaly-model expansion;
+- packaging rewrites unrelated to branch reconciliation.
+
+## Following lanes
+
+2. Resolve the current CI collection blocker by clarifying Keras/TensorFlow handling for `deep_anomaly_detection.py` without making deep learning mandatory unless product authority requires it.
+3. Remove or replace remaining generic placeholder tests in `tests/test_basic.py`.
+4. Reconcile `main.py --analyze` with the 3-feature `AnomalyDetectionModel` contract.
+5. Clarify or fix stale package metadata and console entry point.
+6. Add an explicit default-offline/no-network test lane.
+
+## Verification reference
 
 ```bash
 python3 -m pytest -q
 ```
 
-Latest verification on 2026-08-14 passed:
-
-- `python3 -m pytest -q`: `56 passed`
-- `git diff --check`: PASS
+Latest local repository evidence before this planner-only lane: `56 passed` on 2026-08-14. Current exact-head GitHub Actions Tests evidence is red as documented above.
