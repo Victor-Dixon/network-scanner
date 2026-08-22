@@ -1,6 +1,6 @@
 # Master Task List
 
-**Updated:** 2026-07-03  
+**Updated:** 2026-08-22  
 **Domain:** defensive network security diagnostics for authorized environments.
 
 ## What this project is
@@ -24,6 +24,16 @@ can audit, test, and harden without assuming unimplemented architecture.
 - [x] Synchronize PRD, roadmap, task list, task log, next-up, readiness, project
       structure, and agent docs (2026-07-03).
 - [ ] Keep domain model updated whenever behavior changes.
+
+## P0 — Canonical branch reconciliation
+
+- [ ] Classify the three commits unique to divergent legacy branch `main` as `ALREADY_PROMOTED`, `HISTORICAL_REFERENCE`, `PROMOTE`, or `REJECT`.
+- [ ] Preserve canonical `master`; do not merge divergent `main` wholesale.
+- [ ] Determine whether the branch-side virtualenv/tooling-tree removals still represent cleanup required on current `master` before any branch deletion.
+- [ ] Resolve exact-head GitHub Actions collection failure caused by missing optional Keras handling; current state is `CI_BLOCKED_KERAS`.
+- [ ] Reconcile `MASTER_TASK_LOG.md` and `NEXT_UP.md` after semantic classification and verified promotion decisions.
+
+Current evidence: `main` is 3 commits ahead / 15 behind `master`; no open PR owns the lane as of 2026-08-22.
 
 ## P0 — Test stability and offline safety
 
