@@ -33,7 +33,7 @@ can audit, test, and harden without assuming unimplemented architecture.
 - [ ] Resolve exact-head GitHub Actions collection failure caused by missing optional Keras handling; current state is `CI_BLOCKED_KERAS`.
 - [x] Reconcile `MASTER_TASK_LOG.md` and `NEXT_UP.md` after semantic classification.
 
-Current evidence (2026-09-24): `main` head `8784d670e4824fb80fd48ab7b883c678e0c3e2ca` is 3 commits ahead / 17 behind canonical `master`. All three unique commits are semantically contained or superseded on current `master`; no promotion is required. See `docs/reconciliation/legacy-main-20260924.md`.
+Current evidence (2026-09-24): `main` head `8784d670e4824fb80fd48ab7b883c678e0c3e2ca` is 3 commits ahead / 17 behind canonical `master`. All three unique commits are semantically contained or superseded on current `master`; no promotion is required. Fleet retirement policy reserves exact branch name `main`, so the ref disposition is `PRESERVE / RESERVED_NAME`, not delete-safe. See `docs/reconciliation/legacy-main-20260924.md`.
 
 ## P0 — Test stability and offline safety
 
