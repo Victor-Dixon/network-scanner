@@ -12,7 +12,9 @@ Do not merge `main` wholesale.
 
 All three unique legacy commits are already represented or superseded on current `master`. No file or behavior requires promotion.
 
-Overall classification: `SUPERSEDED / CONTENT_CONTAINED`.
+Content classification: `SUPERSEDED / CONTENT_CONTAINED`.
+
+Ref disposition: `PRESERVE / RESERVED_NAME`. Current fleet retirement policy reserves exact branch name `main`; content containment does not grant deletion authority.
 
 ## Commit-level classification
 
@@ -58,14 +60,13 @@ The donor's July task-priority edits are historical and must not replace the cur
 - `ALREADY_PROMOTED / SUPERSEDED`: all three unique commits
 - `REJECT`: stale July planner/readiness snapshots as current authority
 
-## Retirement gate
+## Ref disposition
 
 After this reconciliation lands on canonical `master`:
 
-1. verify no open PR owns `main`;
-2. re-read `main` and require exact head `8784d670e4824fb80fd48ab7b883c678e0c3e2ca`;
-3. verify `master` remains the repository default;
-4. retire `main` only if all gates remain true;
-5. verify remote ref absence.
+1. keep canonical product authority on `master`;
+2. retain legacy `main` as `PRESERVE / RESERVED_NAME`;
+3. do not merge `main` wholesale;
+4. do not delete or repoint `main` without an explicit fleet-policy change that removes the reserved-name hold.
 
-No branch deletion is performed by this reconciliation PR.
+No branch deletion is authorized by this reconciliation PR.
