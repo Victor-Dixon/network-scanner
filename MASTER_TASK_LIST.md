@@ -27,13 +27,13 @@ can audit, test, and harden without assuming unimplemented architecture.
 
 ## P0 — Canonical branch reconciliation
 
-- [ ] Classify the three commits unique to divergent legacy branch `main` as `ALREADY_PROMOTED`, `HISTORICAL_REFERENCE`, `PROMOTE`, or `REJECT`.
-- [ ] Preserve canonical `master`; do not merge divergent `main` wholesale.
-- [ ] Determine whether the branch-side virtualenv/tooling-tree removals still represent cleanup required on current `master` before any branch deletion.
+- [x] Classify the three commits unique to divergent legacy branch `main`.
+- [x] Preserve canonical `master`; do not merge divergent `main` wholesale.
+- [x] Verify the branch-side virtualenv/tooling-tree removal is already represented on current `master`: the venv files are absent and `.gitignore` excludes `network-scanner/`.
 - [ ] Resolve exact-head GitHub Actions collection failure caused by missing optional Keras handling; current state is `CI_BLOCKED_KERAS`.
-- [ ] Reconcile `MASTER_TASK_LOG.md` and `NEXT_UP.md` after semantic classification and verified promotion decisions.
+- [x] Reconcile `MASTER_TASK_LOG.md` and `NEXT_UP.md` after semantic classification.
 
-Current evidence: `main` is 3 commits ahead / 15 behind `master`; no open PR owns the lane as of 2026-08-22.
+Current evidence (2026-09-24): `main` head `8784d670e4824fb80fd48ab7b883c678e0c3e2ca` is 3 commits ahead / 17 behind canonical `master`. All three unique commits are semantically contained or superseded on current `master`; no promotion is required. See `docs/reconciliation/legacy-main-20260924.md`.
 
 ## P0 — Test stability and offline safety
 
