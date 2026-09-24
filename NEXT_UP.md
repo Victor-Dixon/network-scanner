@@ -24,9 +24,9 @@ Legacy branch `main` is now semantically reconciled and requires no promotion. T
 
 - canonical/default branch: `master`
 - legacy `main` head: `8784d670e4824fb80fd48ab7b883c678e0c3e2ca`
-- legacy branch disposition: `SUPERSEDED / CONTENT_CONTAINED`
+- legacy branch content disposition: `SUPERSEDED / CONTENT_CONTAINED`
 - promotion required from `main`: none
-- current branch retirement gate: replacement reconciliation must merge, then exact-SHA revalidation may retire `main`
+- ref disposition: `PRESERVE / RESERVED_NAME` under current fleet retirement policy; do not delete `main`
 - production readiness remains unclaimed
 
 **Done evidence**
@@ -41,7 +41,7 @@ Legacy branch `main` is now semantically reconciled and requires no promotion. T
 - live/intrusive network activity;
 - unrelated scanner features;
 - broad packaging rewrites;
-- destructive branch deletion before exact-SHA retirement revalidation.
+- destructive mutation of the reserved `main` ref.
 
 ## Following lanes
 
