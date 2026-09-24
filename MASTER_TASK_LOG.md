@@ -58,6 +58,18 @@ authorized environments.
 - `pytest -q`: PASS, `56 passed`
 - `git diff --check`: PASS
 
+## 2026-09-24 — Legacy `main` semantic closeout
+
+- Revalidated `main` at `8784d670e4824fb80fd48ab7b883c678e0c3e2ca`: 3 commits ahead / 17 behind current canonical `master`.
+- Classified governance bundle commit `f095a4c...` as `ALREADY_PROMOTED / SUPERSEDED` by newer canonical status and governance docs.
+- Classified virtualenv-removal commit `9e88c4e...` as `ALREADY_PROMOTED / NO_CURRENT_DELTA`: sampled venv files are absent on `master` and `.gitignore` excludes `network-scanner/`.
+- Classified CI-badge commit `8784d670...` as `ALREADY_PROMOTED`: current README already points at `Victor-Dixon/network-scanner`.
+- Promotion result: none. Divergent `main` must not be merged wholesale.
+- Canonical next work returns to the existing Keras/TensorFlow test-collection blocker.
+- Retirement remains a separate exact-SHA destructive gate after this reconciliation merges.
+- Evidence: `docs/reconciliation/legacy-main-20260924.md`.
+- Status: `CONTENT_CONTAINED / PROMOTE_NONE / RETIREMENT_PENDING_RECONCILIATION_MERGE`.
+
 ## 2026-08-16 — Legacy branch reconciliation
 
 - Revalidated repository ownership: no open pull requests were found at lane start; `master` remains the default/canonical branch.
