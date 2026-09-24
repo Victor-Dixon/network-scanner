@@ -66,9 +66,9 @@ authorized environments.
 - Classified CI-badge commit `8784d670...` as `ALREADY_PROMOTED`: current README already points at `Victor-Dixon/network-scanner`.
 - Promotion result: none. Divergent `main` must not be merged wholesale.
 - Canonical next work returns to the existing Keras/TensorFlow test-collection blocker.
-- Retirement remains a separate exact-SHA destructive gate after this reconciliation merges.
+- Ref disposition is `PRESERVE / RESERVED_NAME` under current fleet retirement policy; content containment does not authorize deletion of `main`.
 - Evidence: `docs/reconciliation/legacy-main-20260924.md`.
-- Status: `CONTENT_CONTAINED / PROMOTE_NONE / RETIREMENT_PENDING_RECONCILIATION_MERGE`.
+- Status: `CONTENT_CONTAINED / PROMOTE_NONE / PRESERVE_RESERVED_NAME`.
 
 ## 2026-08-16 — Legacy branch reconciliation
 
