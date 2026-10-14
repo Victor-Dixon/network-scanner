@@ -4,6 +4,15 @@ This log records documentation, governance, and implementation status changes
 for `network-scanner`, a defensive network security diagnostics toolkit for
 authorized environments.
 
+## 2026-10-14 — Optional-dependency CI test repair (PR #6; UNMERGED)
+
+- The historical `Tests` matrix collection error `ModuleNotFoundError: No module named 'keras'` was reproduced at PR #5 job `115621111064`.
+- Test-only correction: `tests/test_deep_anomaly_detection.py` skips its optional Keras-backed suite when Keras is not installed; `tests/test_basic.py` skips only its `psutil`-dependent placeholder performance test if `psutil` is unavailable.
+- Exact-head verification at PR #6 commit `bc9f56f8a8d2a1b897137e89e733639736dac802`: `CI/CD Pipeline` run `38555344583` and `Tests` run `38555344636` both completed successfully. Dependency-absent skips do not verify functionality requiring Keras or psutil.
+- PR #6 remains subject to independent review, updated-documentation exact-head CI, and merge; default `master` is unchanged by this branch work.
+- Following branch-cleanup gate: update PR #5 against merged `master`, obtain exact-head tests and review, preserve reserved legacy branch `main`.
+- Production-readiness, optional runtime packaging, and generic placeholder-test replacement remain open.
+
 ## 2026-07-03 — Documentation and domain model audit
 
 - Audited code, tests, workflows, and existing documentation without assuming
