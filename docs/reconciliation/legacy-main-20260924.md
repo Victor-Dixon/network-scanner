@@ -39,9 +39,9 @@ Evidence on current `master`:
 - `network-scanner/pyvenv.cfg` is absent;
 - `network-scanner/Scripts/Activate.ps1` is absent;
 - `network-scanner/Scripts/network-scanner-script.py` is absent;
-- `.gitignore` explicitly excludes `network-scanner/`.
+- `.gitignore` on `master` had an ineffective inline comment attached to its `network-scanner/` pattern; that rule did **not** exclude the directory.
 
-Therefore there is no remaining virtualenv cleanup patch to promote.
+This reconciliation PR fixes the ignore rule, with `git check-ignore --no-index network-scanner/pyvenv.cfg` proving the corrected pattern matches. No virtualenv files need promotion from legacy `main`; the ignore correction is new work on the reconciliation branch.
 
 ### `8784d670e4824fb80fd48ab7b883c678e0c3e2ca`
 `docs: fix CI badge URL to Victor-Dixon/network-scanner`
