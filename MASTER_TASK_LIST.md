@@ -29,7 +29,7 @@ can audit, test, and harden without assuming unimplemented architecture.
 
 - [x] Classify the three commits unique to divergent legacy branch `main`.
 - [x] Preserve canonical `master`; do not merge divergent `main` wholesale.
-- [x] Verify the branch-side virtualenv/tooling-tree removal is already represented on current `master`: the venv files are absent and `.gitignore` excludes `network-scanner/`.
+- [x] Verify the legacy virtualenv files are absent from `master`; correct the ineffective `.gitignore` pattern for `network-scanner/` in this reconciliation PR (tested with `git check-ignore --no-index`).
 - [ ] Resolve exact-head GitHub Actions collection failure caused by missing optional Keras handling; current state is `CI_BLOCKED_KERAS`.
 - [x] Reconcile `MASTER_TASK_LOG.md` and `NEXT_UP.md` after semantic classification.
 
