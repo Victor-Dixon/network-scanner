@@ -62,7 +62,7 @@ authorized environments.
 
 - Revalidated `main` at `8784d670e4824fb80fd48ab7b883c678e0c3e2ca`: 3 commits ahead / 17 behind current canonical `master`.
 - Classified governance bundle commit `f095a4c...` as `ALREADY_PROMOTED / SUPERSEDED` by newer canonical status and governance docs.
-- Classified virtualenv-removal commit `9e88c4e...` as `ALREADY_PROMOTED / NO_CURRENT_DELTA`: sampled venv files are absent on `master` and `.gitignore` excludes `network-scanner/`.
+- Classified virtualenv-removal commit `9e88c4e...` as `ALREADY_PROMOTED / NO_CURRENT_DELTA` for tracked files: sampled venv files are absent on `master`. The pre-existing `.gitignore` rule was ineffective; this reconciliation PR corrects it and verifies the replacement with `git check-ignore --no-index`.
 - Classified CI-badge commit `8784d670...` as `ALREADY_PROMOTED`: current README already points at `Victor-Dixon/network-scanner`.
 - Promotion result: none. Divergent `main` must not be merged wholesale.
 - Canonical next work returns to the existing Keras/TensorFlow test-collection blocker.
