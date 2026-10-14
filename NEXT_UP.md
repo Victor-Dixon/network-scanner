@@ -51,7 +51,7 @@ This was the **historical** red result at head `930305f`; it was subsequently ad
 **Blockers**
 
 - Determine whether any of the three branch-only commits still contain value not already represented on `master`.
-- Current GitHub Actions Tests baseline is red on the documented Keras dependency gap.
+- Historical 2026-08-16 GitHub Actions Tests baseline was red on missing Keras. That collection issue is addressed by PR #6; green results were verified at `bc9f56f8` before documentation updates. The latest PR #6 head remains subject to its own exact-head CI and independent review; this historical error is no longer a current execution blocker.
 
 **Done evidence**
 
