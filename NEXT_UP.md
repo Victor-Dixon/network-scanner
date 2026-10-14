@@ -55,7 +55,7 @@ Legacy branch `main` is now semantically reconciled and requires no promotion. T
 The three unique `main` commits are fully classified in `docs/reconciliation/legacy-main-20260924.md`:
 
 - governance bundle: superseded by newer canonical docs;
-- virtualenv removal: already represented on master (files absent; ignore rule present);
+- virtualenv removal: tracked files absent on `master`; broken ignore syntax corrected in this reconciliation PR and checked with `git check-ignore --no-index`;
 - CI badge fix: already represented on master.
 
 No donor commit requires promotion.
