@@ -7,7 +7,7 @@
 
 ### Finish PR #6 repository merge gate; then reconcile PR #5
 
-- PR #6 `fix/optional-keras-test-collection-20261014` makes the optional Keras test suite and optional `psutil` placeholder test skip when their undeclared dependencies are absent. Exact-head `bc9f56f8a8d2a1b897137e89e733639736dac802`: `CI/CD Pipeline` run `38555344583` succeeded and `Tests` run `38555344636` succeeded. **PR #6 is CI-verified at its current branch head; merging is governed by network-scanner's own repository controls, not Weghachi's independent-review rule.**
+- PR #6 `fix/optional-keras-test-collection-20261014` makes the optional Keras test suite and optional `psutil` placeholder test skip when their undeclared dependencies are absent. Exact-head `bc9f56f8a8d2a1b897137e89e733639736dac802`: `CI/CD Pipeline` run `38555344583` succeeded and `Tests` run `38555344636` succeeded. **Earlier PR #6 heads passed CI; the latest head must pass its exact-head checks after these documentation changes. Merge authorization follows network-scanner's repository contract and GitHub rules.**
 - Once merged under repository controls, rebase/update the legacy-`main` reconciliation PR #5 and require fresh exact-head CI and repository merge gates before merging. PR #5 must preserve reserved branch `main`; it does not authorize that ref's deletion.
 - Keras/TensorFlow runtime packaging decisions, placeholder-test replacement, and production readiness remain open. Do not interpret the dependency-absent test skips as testing the optional deep-learning functionality.
 
@@ -51,7 +51,7 @@ This was the **historical** red result at head `930305f`; it was subsequently ad
 **Blockers**
 
 - Determine whether any of the three branch-only commits still contain value not already represented on `master`.
-- Historical 2026-08-16 GitHub Actions Tests baseline was red on missing Keras. That collection issue is addressed by PR #6; green results were verified at `bc9f56f8` before documentation updates. The latest PR #6 head remains subject to its own exact-head CI and independent review; this historical error is no longer a current execution blocker.
+- Historical 2026-08-16 GitHub Actions Tests baseline was red on missing Keras. That collection issue is addressed by PR #6; green results were verified at `bc9f56f8` before documentation updates. The latest PR #6 head remains subject to exact-head CI and the repository's merge rules; this historical error is no longer a current execution blocker.
 
 **Done evidence**
 
@@ -70,7 +70,7 @@ This was the **historical** red result at head `930305f`; it was subsequently ad
 
 ## Following lanes
 
-2. Clarify optional deep-learning runtime packaging and coverage without making Keras/TensorFlow mandatory in the base install; the test collection fix is in PR #6, subject to review and merge.
+2. Clarify optional deep-learning runtime packaging and coverage without making Keras/TensorFlow mandatory in the base install; the test collection fix is in PR #6, subject to exact-head CI and authorized merge.
 3. Remove or replace remaining generic placeholder tests in `tests/test_basic.py`.
 4. Reconcile `main.py --analyze` with the 3-feature `AnomalyDetectionModel` contract.
 5. Clarify or fix stale package metadata and console entry point.
@@ -82,4 +82,4 @@ This was the **historical** red result at head `930305f`; it was subsequently ad
 python3 -m pytest -q
 ```
 
-Historical local evidence: `56 passed` on 2026-08-14. Historical August exact-head Actions Tests were red as documented above. The latest **PR #6** exact-head Actions workflow runs cited in Current priority above are green; PR #6 is not yet merged.
+Historical local evidence: `56 passed` on 2026-08-14. Historical August exact-head Actions Tests were red as documented above. Previous **PR #6** exact-head Actions workflow receipts cited above are green for their respective commits; the latest documentation-only HEAD must be verified separately. PR #6 is not yet merged.
