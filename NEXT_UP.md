@@ -5,10 +5,10 @@
 
 ## Current priority (2026-10-14)
 
-### Independently review PR #6; then reconcile PR #5
+### Finish PR #6 repository merge gate; then reconcile PR #5
 
-- PR #6 `fix/optional-keras-test-collection-20261014` makes the optional Keras test suite and optional `psutil` placeholder test skip when their undeclared dependencies are absent. Exact-head `bc9f56f8a8d2a1b897137e89e733639736dac802`: `CI/CD Pipeline` run `38555344583` succeeded and `Tests` run `38555344636` succeeded. **PR #6 remains unmerged and requires independent review.**
-- Once approved and merged, rebase/update the legacy-`main` reconciliation PR #5 and require fresh exact-head CI and review before merging. PR #5 must preserve reserved branch `main`; it does not authorize that ref's deletion.
+- PR #6 `fix/optional-keras-test-collection-20261014` makes the optional Keras test suite and optional `psutil` placeholder test skip when their undeclared dependencies are absent. Exact-head `bc9f56f8a8d2a1b897137e89e733639736dac802`: `CI/CD Pipeline` run `38555344583` succeeded and `Tests` run `38555344636` succeeded. **PR #6 is CI-verified at its current branch head; merging is governed by network-scanner's own repository controls, not Weghachi's independent-review rule.**
+- Once merged under repository controls, rebase/update the legacy-`main` reconciliation PR #5 and require fresh exact-head CI and repository merge gates before merging. PR #5 must preserve reserved branch `main`; it does not authorize that ref's deletion.
 - Keras/TensorFlow runtime packaging decisions, placeholder-test replacement, and production readiness remain open. Do not interpret the dependency-absent test skips as testing the optional deep-learning functionality.
 
 ## Historical reconciliation snapshot (2026-08-16)
