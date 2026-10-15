@@ -30,7 +30,7 @@ can audit, test, and harden without assuming unimplemented architecture.
 - [ ] Classify the three commits unique to divergent legacy branch `main` as `ALREADY_PROMOTED`, `HISTORICAL_REFERENCE`, `PROMOTE`, or `REJECT`.
 - [ ] Preserve canonical `master`; do not merge divergent `main` wholesale.
 - [ ] Determine whether the branch-side virtualenv/tooling-tree removals still represent cleanup required on current `master` before any branch deletion.
-- [x] Resolve missing-Keras test collection in PR #6 (`bc9f56f8`): skip the Keras-dependent suite only when the optional package is absent. Exact-head `Tests` run `38555344636` and `CI/CD Pipeline` run `38555344583` both succeeded. PR remains unmerged pending independent review. Runtime Keras/TensorFlow packaging remains separately open under dependency clarity.
+- [x] Resolve missing-Keras test collection in PR #6 (`bc9f56f8`): skip the Keras-dependent suite only when the optional package is absent. Exact-head `Tests` run `38555344636` and `CI/CD Pipeline` run `38555344583` both succeeded. PR #6 has current-head CI proof (`6087987624910287458fe6c96b7c4a4a8866dc45`, runs `38560384620` and `38560384650`, both SUCCESS); default-branch merge and closure receipts are tracked separately. Runtime Keras/TensorFlow packaging remains separately open under dependency clarity.
 - [ ] Reconcile `MASTER_TASK_LOG.md` and `NEXT_UP.md` after semantic classification and verified promotion decisions.
 
 Current evidence: `main` is 3 commits ahead / 15 behind `master`; no open PR owns the lane as of 2026-08-22.
