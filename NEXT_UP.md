@@ -1,9 +1,17 @@
 # NEXT UP
 
-**Reconciled:** 2026-08-16  
+**Reconciled:** 2026-10-14  
 **Domain:** defensive network security diagnostics for authorized environments.
 
-## Highest-priority executable lane
+## Current priority (2026-10-14)
+
+### Finish PR #6 repository merge gate; then reconcile PR #5
+
+- PR #6 `fix/optional-keras-test-collection-20261014` makes the optional Keras test suite and optional `psutil` placeholder test skip when their undeclared dependencies are absent. Exact-head `bc9f56f8a8d2a1b897137e89e733639736dac802`: `CI/CD Pipeline` run `38555344583` succeeded and `Tests` run `38555344636` succeeded. **Earlier PR #6 heads passed CI; the latest head must pass its exact-head checks after these documentation changes. Merge authorization follows network-scanner's repository contract and GitHub rules.**
+- Once merged under repository controls, rebase/update the legacy-`main` reconciliation PR #5 and require fresh exact-head CI and repository merge gates before merging. PR #5 must preserve reserved branch `main`; it does not authorize that ref's deletion.
+- Keras/TensorFlow runtime packaging decisions, placeholder-test replacement, and production readiness remain open. Do not interpret the dependency-absent test skips as testing the optional deep-learning functionality.
+
+## Historical reconciliation snapshot (2026-08-16)
 
 ### Reconcile divergent legacy branch `main` against canonical `master`
 
@@ -29,7 +37,7 @@ The repository default and current product authority is `master`, but a separate
 - Classify `main` as `DIVERGED_LEGACY / SALVAGE_CANDIDATE` pending semantic reconciliation.
 - No open pull request owned `main` at the start of this standardization audit.
 
-## Exact-head acceptance state for this planner lane
+## Historical exact-head acceptance state for the 2026-08-16 planner lane
 
 At PR head `930305f691e9001350fc99b529f67cc197ddf4ab`:
 
@@ -38,12 +46,12 @@ At PR head `930305f691e9001350fc99b529f67cc197ddf4ab`:
 - Failing collection path: `tests/test_deep_anomaly_detection.py` -> `deep_anomaly_detection.py` -> `from keras.models import ...`.
 - Concrete blocker: `ModuleNotFoundError: No module named 'keras'`.
 
-This is consistent with the existing `MASTER_TASK_LIST.md` item to clarify Keras/TensorFlow dependency handling. Therefore `CI_VERIFIED=false`; the prior local `56 passed` evidence is preserved as historical local proof, not substituted for current GitHub Actions proof.
+This was the **historical** red result at head `930305f`; it was subsequently addressed for dependency-absent test collection by PR #6. At that earlier head, `CI_VERIFIED=false`; the prior local `56 passed` evidence is historical local proof, not current GitHub Actions proof.
 
 **Blockers**
 
 - Determine whether any of the three branch-only commits still contain value not already represented on `master`.
-- Current GitHub Actions Tests baseline is red on the documented Keras dependency gap.
+- Historical 2026-08-16 GitHub Actions Tests baseline was red on missing Keras. That collection issue is addressed by PR #6; green results were verified at `bc9f56f8` before documentation updates. The latest PR #6 head remains subject to exact-head CI and the repository's merge rules; this historical error is no longer a current execution blocker.
 
 **Done evidence**
 
@@ -62,7 +70,7 @@ This is consistent with the existing `MASTER_TASK_LIST.md` item to clarify Keras
 
 ## Following lanes
 
-2. Resolve the current CI collection blocker by clarifying Keras/TensorFlow handling for `deep_anomaly_detection.py` without making deep learning mandatory unless product authority requires it.
+2. Clarify optional deep-learning runtime packaging and coverage without making Keras/TensorFlow mandatory in the base install; the test collection fix is in PR #6, subject to exact-head CI and authorized merge.
 3. Remove or replace remaining generic placeholder tests in `tests/test_basic.py`.
 4. Reconcile `main.py --analyze` with the 3-feature `AnomalyDetectionModel` contract.
 5. Clarify or fix stale package metadata and console entry point.
@@ -74,4 +82,4 @@ This is consistent with the existing `MASTER_TASK_LIST.md` item to clarify Keras
 python3 -m pytest -q
 ```
 
-Latest local repository evidence before this planner-only lane: `56 passed` on 2026-08-14. Current exact-head GitHub Actions Tests evidence is red as documented above.
+Historical local evidence: `56 passed` on 2026-08-14. Historical August exact-head Actions Tests were red as documented above. Previous **PR #6** exact-head Actions workflow receipts cited above are green for their respective commits; the latest documentation-only HEAD must be verified separately. PR #6 is not yet merged.
