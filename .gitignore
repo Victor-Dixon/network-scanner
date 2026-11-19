@@ -10,7 +10,8 @@ __pycache__/
 # Virtual environments
 env/
 venv/
-network-scanner/  # Your specific virtual environment name
+# Local virtual environment directory
+network-scanner/
 
 # Distribution / packaging
 .Python
