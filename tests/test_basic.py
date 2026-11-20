@@ -116,7 +116,8 @@ class TestPerformance:
 
     def test_memory_usage(self):
         """Test memory usage doesn't grow excessively."""
-        import psutil
+        # psutil is optional; omit this placeholder performance check if absent.
+        psutil = pytest.importorskip("psutil", reason="optional performance dependency not installed")
         import os
 
         process = psutil.Process(os.getpid())
