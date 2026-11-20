@@ -1,7 +1,13 @@
 import unittest
 import numpy as np
 import pandas as pd
+import pytest
 from unittest.mock import patch, MagicMock
+
+# Keras is an optional deep-learning dependency, absent from base requirements.
+# Skip this suite only when the optional dependency is unavailable.
+pytest.importorskip("keras", reason="optional Keras dependency not installed")
+
 from deep_anomaly_detection import (
     load_preprocess_data,
     build_autoencoder,
